@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You! - Sleep Reset</title>
+
+<!--
+  ========================================================================
+  BEFORE UPLOADING:
+  1) Replace "UET_TAG_ID_IDE" below with your actual UET tag ID
+     (found in: Microsoft Advertising > Tools > Conversion Tracking > UET Tags)
+  2) Set the Payhip checkout redirect URL to this page:
+     https://dietnatural.github.io/yusleep/thankyou.html
+  ========================================================================
+-->
+
+<!-- Simple consent handling (EU/EEA visitors, required since Oct 2025) -->
+<script>
+  window.consentGiven = localStorage.getItem('uet_consent') === 'granted';
+</script>
+
+<!-- Microsoft UET tag -->
+<script>
+(function(w,d,t,r,u){
+  var f,n,i;
+  w[u]=w[u]||[],f=function(){
+    var o={ti:"UET_TAG_ID_IDE", enableAutoSpaTracking:true};
+    o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+  },
+  n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){
+    var s=this.readyState;
+    s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+  },
+  i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
+})(window,document,"script","//bat.bing.com/bat.js","uetq");
+</script>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0f172a;
+    color: #f1f5f9;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    max-width: 480px;
+    padding: 48px 36px;
+    text-align: center;
+  }
+  .checkmark {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  h1 { font-size: 26px; margin: 0 0 12px; }
+  p { color: #94a3b8; line-height: 1.6; }
+  .email-note {
+    margin-top: 28px;
+    padding: 16px;
+    background: #1e293b;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  #consent-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #1e293b;
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #cbd5e1;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.3);
+  }
+  #consent-banner button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #accept-btn { background: #22c55e; color: #0f172a; font-weight: 600; }
+  #decline-btn { background: transparent; color: #94a3b8; border: 1px solid #475569 !important; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="checkmark">✓</div>
+  <h1>Thank you for your purchase!</h1>
+  <p>Your Sleep Reset e-book will arrive in your email inbox from Payhip within a few minutes. Please check your spam/junk folder if you don't see it.</p>
+  <div class="email-note">
+    Questions? Just reply to the confirmation email you received, or reach out to the support address listed on your order receipt.
+  </div>
+</div>
+
+<div id="consent-banner">
+  <span>This site uses cookies to measure ad performance.</span>
+  <div>
+    <button id="decline-btn">Decline</button>
+    <button id="accept-btn">Accept</button>
+  </div>
+</div>
+
+<script>
+  var banner = document.getElementById('consent-banner');
+  var existing = localStorage.getItem('uet_consent');
+  if (existing) { banner.style.display = 'none'; }
+
+  function setConsent(value) {
+    localStorage.setItem('uet_consent', value);
+    banner.style.display = 'none';
+    if (value === 'granted' && window.uetq) {
+      window.uetq.push('consent', 'update', { ad_storage: 'granted' });
+    }
+  }
+  document.getElementById('accept-btn').addEventListener('click', function() {
+    setConsent('granted');
+  });
+  document.getElementById('decline-btn').addEventListener('click', function() {
+    setConsent('denied');
+  });
+
+  if (existing === 'granted' && window.uetq) {
+    window.uetq.push('consent', 'update', { ad_storage: 'granted' });
+  }
+
+  window.uetq = window.uetq || [];
+  window.uetq.push('event', 'purchase', {
+    'event_category': 'ecommerce',
+    'event_label': 'sleep_reset_ebook',
+    'revenue_value': 17,
+    'currency': 'USD'
+  });
+</script>
+
+</body>
+</html>
